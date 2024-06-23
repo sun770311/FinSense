@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSense Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .sidebar {
+            width: 220px; /* Narrower sidebar */
+            background: linear-gradient(to bottom, #1e1e1e, #2c3e50); /* Gradient background */
+            padding: 40px 20px 20px 30px; /* Adjust padding */
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h2 {
+            margin: 0;
+            margin-bottom: 10px;
+        }
+        .sidebar p, .sidebar li {
+            color: #d3d3d3; /* Slightly gray-white color for the body text */
+        }
+        .sidebar ul {
+            padding-left: 20px;
+        }
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 10px 30px 10px 10px; /* Added right padding */
+        }
+        .container {
+            width: 100%;
+            background: #1e1e1e;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .task-section {
+            height: 25%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 10px; /* Increased margin at the bottom */
+        }
+        .task-section h1 {
+            margin-left: 10px; /* Align with sidebar padding */
+            font-size: 22px;
+        }
+        .task-cards {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 10px;
+        }
+        .task-card {
+            background: linear-gradient(to bottom right, #2c2c2c, #2c3e50); /* Gradient background */
+            border-radius: 10px;
+            padding: 10px;
+            width: 30%;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        .task-card h3 {
+            margin: 0;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .task-card p {
+            font-size: 14px;
+            color: #d3d3d3; /* Slightly gray-white color for the body text */
+        }
+        .chat-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Ensure chat-section itself doesn't overflow */
+        }
+        .chat-box {
+            flex: 1;
+            border: 1px solid #333;
+            padding: 10px;
+            margin-bottom: 10px;
+            overflow-y: auto; /* Ensure scrolling is enabled */
+            background: #2c2c2c;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-box p {
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 10px;
+            word-wrap: break-word;
+            max-width: 70%;
+        }
+        .chat-box .user {
+            background: #367ba1;
+            color: #ffffff;
+            align-self: flex-end;
+        }
+        .chat-box .assistant {
+            background: #444;
+            color: #ffffff;
+            align-self: flex-start;
+        }
+        .chat-box .func {
+            background: linear-gradient(to bottom right, #2c2c2c, #2c3e50);
+            color: #ffffff;
+            align-self: flex-start;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px 0;
+            word-wrap: break-word;
+            max-width: 70%;
+        }
+        form {
+            display: flex;
+        }
+        form input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            margin-right: 10px;
+            font-size: 16px;
+            background: #333;
+            color: #ffffff;
+            outline: none; /* Remove the default outline */
+        }
+        form input[type="text"]:focus {
+            border-color: #0288d1; /* Change the border color on focus */
+            box-shadow: 0 0 5px rgba(2, 136, 209, 0.5); /* Optional: add a shadow to emphasize focus */
+        }
+        form button {
+            padding: 10px 20px;
+            border: none;
+            background: #0288d1;
+            color: white;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        form button:hover {
+            background: #0277bd;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>FinSense</h2>
+        <p>A financial analysis and recommendation system leveraging LLMs to answer user input questions with real-time data. Technologies used:</p>
+        <ul>
+            <li>OpenAI GPT-4</li>
+            <li>LangChain</li>
+            <li>Finnhub</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="container">
+            <div class="task-section">
+                <h1>Here are some things I can do:</h1>
+                <div class="task-cards">
+                    <div class="task-card">
+                        <h3>General Financial Q&A</h3>
+                        <p>Provide guidance on personal finance, investing, banking, planning, etc.</p>
+                    </div>
+                    <div class="task-card">
+                        <h3>Financial News Retrieval</h3>
+                        <p>Receive news on companies of interest within a specific date range. Source, summary, and URL specified for each entry.</p>
+                    </div>
+                    <div class="task-card">
+                        <h3>Stock Query</h3>
+                        <p>Retrieve stock fundamentals, estimates, and price data. (History limited to Finnhub subscription tier)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-section">
+                <div class="chat-box" id="chat-box">
+                    <p class="assistant">Hello! How can I assist you today? Please type your question below.</p>
+                </div>
+                <form id="chat-form">
+                    <input type="text" id="user-input" placeholder="Enter your question here..." required>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('chat-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+        
+            const userInput = document.getElementById('user-input').value;
+            const chatBox = document.getElementById('chat-box');
+        
+            // Append user message to chat box
+            const userMessage = document.createElement('p');
+            userMessage.className = 'user';
+            userMessage.textContent = userInput;
+            chatBox.appendChild(userMessage);
+        
+            // Clear the input field
+            document.getElementById('user-input').value = '';
+        
+            // Send user input to server
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_input: userInput })
+            });
+            const data = await response.json();
+        
+            // Append function name message to chat box
+            const functionMessage = document.createElement('p');
+            functionMessage.className = 'func';
+            functionMessage.textContent = data.func;
+            chatBox.appendChild(functionMessage);
+        
+            // Append assistant message to chat box
+            const assistantMessage = document.createElement('p');
+            assistantMessage.className = 'assistant';
+            assistantMessage.textContent = data.response;
+            chatBox.appendChild(assistantMessage);
+        
+            // Scroll chat box to the bottom
+            chatBox.scrollTop = chatBox.scrollHeight;
+        
+            // Append assistant's second message after a 0.5-second delay
+            setTimeout(() => {
+                const moreQuestionsMessage = document.createElement('p');
+                moreQuestionsMessage.className = 'assistant';
+                moreQuestionsMessage.textContent = data.more_questions;
+                chatBox.appendChild(moreQuestionsMessage);
+        
+                // Scroll chat box to the bottom again
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 500); // 0.5 second delay
+        });
+    </script>             
+</body>
+</html>
