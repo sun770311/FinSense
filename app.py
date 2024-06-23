@@ -153,14 +153,11 @@ def chat():
         return jsonify({"response": "An error occurred while generating the response from ChatGPT."})
 
     try:
-        print(chat_response.json())
         assistant_message = chat_response.json()["choices"][0]["message"]
-        print(f"chat response was: {assistant_message}") # verified that it works until here
     except Exception as e:
         print(f"Error parsing chat response: {e}")
         return jsonify({"response": "An error occurred while parsing the response from ChatGPT."})
 
-    
     fn_name = assistant_message["function_call"]["name"]
     arguments = assistant_message["function_call"]["arguments"]
     function = functions_map.get(fn_name)
@@ -168,9 +165,7 @@ def chat():
         try:
             result = function(arguments)
             response_content = result
-            print(f"Response is: {response_content}")
         except Exception as e:
-            print(f"Error calling function {fn_name}: {e}")
             response_content = "An error occurred while executing the function."
     else:
         response_content = "Function not found."
@@ -178,7 +173,7 @@ def chat():
     # Append the assistant's second message
     more_questions_message = "Do you have any more questions I can help with?"
 
-    func = fn_name + " speaking:"
+    func = config[fn_name] + " speaking:"
 
     return jsonify({
         "func": func,

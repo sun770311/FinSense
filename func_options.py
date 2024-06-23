@@ -55,20 +55,16 @@ def get_company_news(arguments):
         # Retrieve company news
         news = finnhub_client.company_news(company_name, _from=start_date, to=end_date)
         
-        # Convert datetime from Unix timestamp to a readable format
         for article in news:
             article['datetime'] = datetime.fromtimestamp(article['datetime'], timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
 
-        # Get all unique keys from the news items
         headers = set()
         for article in news:
             headers.update(article.keys())
         headers = list(headers)
 
-        # Define the CSV file name
         csv_file = 'company_news.csv'
 
-        # Write the news to a CSV file
         with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
             writer = csv.DictWriter(file, fieldnames=headers)
             writer.writeheader()
@@ -103,16 +99,13 @@ def earn_surprises(arguments):
         # Fetch earnings surprises
         earn_s = finnhub_client.company_earnings(company_name, limit=limit)
         
-        # Convert the earnings surprises data to a CSV file
         headers = set()
         for record in earn_s:
             headers.update(record.keys())
         headers = list(headers)
 
-        # Define the CSV file name
         csv_file = f'{company_name}_earnings_surprises.csv'
 
-        # Write the earnings surprises to a CSV file
         with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
             writer = csv.DictWriter(file, fieldnames=headers)
             writer.writeheader()
@@ -141,25 +134,20 @@ def basic_fin(arguments):
         # Fetch basic financial data
         basics = finnhub_client.company_basic_financials(company_name, "all")
 
-        # Prepare data for CSV
         series_data = basics.get("series", {}).get("annual", {})
         metric_data = basics.get("metric", {})
 
-        # Prepare series data for CSV
         series_headers = set()
         for key in series_data:
             for record in series_data[key]:
                 series_headers.update(record.keys())
         series_headers = list(series_headers)
         
-        # Prepare metric data for CSV
         metric_headers = list(metric_data.keys())
 
-        # Define CSV file names
         series_csv_file = f'{company_name}_financial_series.csv'
         metric_csv_file = f'{company_name}_financial_metrics.csv'
 
-        # Write series data to CSV
         with open(series_csv_file, mode='w', newline='', encoding='utf-8') as file:
             writer = csv.DictWriter(file, fieldnames=["type"] + series_headers)
             writer.writeheader()
@@ -168,7 +156,6 @@ def basic_fin(arguments):
                     record["type"] = key
                     writer.writerow(record)
 
-        # Write metric data to CSV
         with open(metric_csv_file, mode='w', newline='', encoding='utf-8') as file:
             writer = csv.DictWriter(file, fieldnames=["metric", "value"])
             writer.writeheader()
