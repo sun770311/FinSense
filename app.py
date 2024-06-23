@@ -141,7 +141,7 @@ def chat():
     if not user_input:
         return jsonify({"error": "Invalid input"}), 400
 
-    # Initialize messages
+    # Initialize messages to guide assistant behavior
     messages = [{"role": "system", "content": 
                  "Don't make assumptions about what values to plug into functions. Ask for clarification if a user request is ambiguous."}]
     messages.append({"role": "user", "content": user_input})
@@ -152,14 +152,15 @@ def chat():
     if isinstance(chat_response, Exception):
         return jsonify({"response": "An error occurred while generating the response from ChatGPT."})
 
-    try:
+    try: # parsing ChatGPT response
         assistant_message = chat_response.json()["choices"][0]["message"]
     except Exception as e:
         print(f"Error parsing chat response: {e}")
         return jsonify({"response": "An error occurred while parsing the response from ChatGPT."})
 
-    fn_name = assistant_message["function_call"]["name"]
-    arguments = assistant_message["function_call"]["arguments"]
+    # Decide which function to execute based on ChatGPT response
+    fn_name = assistant_message["function_call"]["name"] # extracts name of function based on user input and context
+    arguments = assistant_message["function_call"]["arguments"] # extracts function arguments
     function = functions_map.get(fn_name)
     if function:
         try:
