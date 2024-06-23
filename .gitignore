@@ -1,1 +1,8 @@
+# Ignore compiled bytecode files
+*.pyc
+
+# Ignore cache directories
+__pycache__/
+
+# Other files and directories to ignore
 .DS_Store
