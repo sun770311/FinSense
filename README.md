@@ -67,6 +67,17 @@ In app.py:
 * basic_fin: get company basic financials
 * general_faq: general financial Q&A
 
+functions_map: a lookup table that maps function names to their corresponding implementations, allowing the system to dynamically call specific functions based on LLM responses.
+```python
+functions_map = {
+    "get_current_stock_price": get_current_stock_price,
+    "get_company_news": get_company_news,
+    "earn_surprises": earn_surprises,
+    "basic_fin": basic_fin,
+    "general_faq": general_faq
+}
+```
+
 ### Create function specifications for interacting with APIs
 Example (earn_surprises):
 ```python
