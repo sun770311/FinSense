@@ -16,7 +16,7 @@ pip install -r requirements.txt
 
 ## Getting Started: Configure API Keys and Model Name
 Modify config.json with your API keys and selected LLM.
-```
+```json
 {
     "finnhub_api_key": "<your finnhub API key here>",
     "openai_api_key": "<your OpenAI API key here>",
@@ -33,7 +33,7 @@ Modify config.json with your API keys and selected LLM.
 [See Tutorial](https://www.pragnakalp.com/openai-function-calling-with-external-api-examples/)
 
 1. Utility Function Facilitating OpenAI Chat Completion Requests
-```
+```python
 GPT_MODEL = config["GPT_MODEL"]
 # Chat completion functions
 def chat_completion_request(messages, functions=None, function_call=None, model=GPT_MODEL):
@@ -69,7 +69,7 @@ In app.py:
 
 3. Create function specifications for interacting with APIs
 Example (earn_surprises):
-```
+```python
 {
     "name": "earn_surprises",
     "description": "It will get the company historical quarterly earnings surprise.",
