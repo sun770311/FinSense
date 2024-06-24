@@ -94,8 +94,19 @@ Here, company_name is the only required parameter. Not specifying limit retrieve
 ### Chat Endpoint Description
 The /chat endpoint in the Flask application (see app.py) handles POST requests to facilitate interaction with OpenAI's ChatGPT model. It processes user input, generates responses using the ChatGPT model, and intelligently decides which of the 5 functions above to execute based on the model's output. 
 
+### Running the App
+Navigate to the FinSense directory, then execute from terminal:
+```
+python app.py
+```
+
 ## Web-based chat interface
 ![Interface Image](https://github.com/sun770311/FinSense/blob/main/finsense_ui.jpg)
+
+## Framework and Tools Used
+[Finnhub](https://github.com/Finnhub-Stock-API/finnhub-python)
+
+[LangChain](https://js.langchain.com/v0.1/docs/integrations/chat/openai/)
 
 
 
