@@ -95,7 +95,7 @@ Here, company_name is the only required parameter. Not specifying limit retrieve
 The /chat endpoint in the Flask application (see app.py) handles POST requests to facilitate interaction with OpenAI's ChatGPT model. It processes user input, generates responses using the ChatGPT model, and intelligently decides which of the 5 functions above to execute based on the model's output. 
 
 ## Web-based chat interface
-
+![Interface Image](https://github.com/sun770311/FinSense/blob/main/finsense_ui.jpg)
 
 
 
