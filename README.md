@@ -104,9 +104,9 @@ python app.py
 ![Interface Image](https://github.com/sun770311/FinSense/blob/main/finsense_ui.jpg)
 
 ## Framework and Tools Used
-[Finnhub](https://github.com/Finnhub-Stock-API/finnhub-python)
+[Finnhub](https://github.com/Finnhub-Stock-API/finnhub-python): FREE realtime API for stocks, forex and cryptocurrency.
 
-[LangChain](https://js.langchain.com/v0.1/docs/integrations/chat/openai/)
+[LangChain](https://js.langchain.com/v0.1/docs/integrations/chat/openai/): LangChain's interface for interacting with OpenAI's API.
 
 
 
