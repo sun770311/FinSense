@@ -29,6 +29,75 @@ Modify config.json with your API keys and selected LLM.
 }
 ```
 
+## OpenAI Function Calling with External APIs
+[See Tutorial](https://www.pragnakalp.com/openai-function-calling-with-external-api-examples/)
+
+1. Utility Function Facilitating OpenAI Chat Completion Requests
+```
+GPT_MODEL = config["GPT_MODEL"]
+# Chat completion functions
+def chat_completion_request(messages, functions=None, function_call=None, model=GPT_MODEL):
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {config['openai_api_key']}",
+    }
+    json_data = {"model": model, "messages": messages}
+    if functions is not None:
+        json_data.update({"functions": functions})
+    if function_call is not None:
+        json_data.update({"function_call": function_call})
+    try:
+        response = requests.post(
+            "https://api.openai.com/v1/chat/completions",
+            headers=headers,
+            json=json_data,
+        )
+        return response
+    except Exception as e:
+        print("Unable to generate ChatCompletion response")
+        print(f"Exception: {e}")
+        return e
+```
+
+2. Define Functions Invoking the Finnhub and ChatOpenAI API
+In app.py:
+* get_current_stock_price: get current stock price
+* get_company_news: get company-related news
+* earn_surprises: get earnings surprises (quarter limit depends on Finnhub subscription tier)
+* basic_fin: get company basic financials
+* general_faq: general financial Q&A
+
+3. Create function specifications for interacting with APIs
+Example (earn_surprises):
+```
+{
+    "name": "earn_surprises",
+    "description": "It will get the company historical quarterly earnings surprise.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "company_name": {
+                "type": "string",
+                "description": "This is the name of the company we want related news on.",
+            },
+            "limit": {
+                "type": "string",
+                "description": "Limit number of period returned. Leave blank to get the full history.",
+            }
+        },
+        "required": ["company_name"],
+    },
+}
+```
+Here, company_name is the only required parameter. Not specifying limit retrieves the full history (up to 4 quarters for free Finnhub subscription).
+
+4. Chat Endpoint Description
+The /chat endpoint in the Flask application (see app.py) handles POST requests to facilitate interaction with OpenAI's ChatGPT model. It processes user input, generates responses using the ChatGPT model, and intelligently decides which of the 5 functions above to execute based on the model's output. 
+
+## Web-based chat interface
+
+
+
 
 
 
