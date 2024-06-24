@@ -93,10 +93,9 @@
             overflow: hidden; /* Ensure chat-section itself doesn't overflow */
         }
         .chat-box {
-            flex: 1;
+            height: calc(100vh - 300px); /* Adjust this value as needed */
             border: 1px solid #333;
             padding: 10px;
-            margin-bottom: 20px;
             overflow-y: auto; /* Ensure scrolling is enabled */
             background: #2c2c2c;
             border-radius: 10px;
@@ -132,6 +131,7 @@
         }
         form {
             display: flex;
+            padding: 10px 0; /* Added padding to avoid overlap with chat-box */
         }
         form input[type="text"] {
             flex: 1;
