@@ -32,7 +32,7 @@ Modify config.json with your API keys and selected LLM.
 ## OpenAI Function Calling with External APIs
 [See Tutorial](https://www.pragnakalp.com/openai-function-calling-with-external-api-examples/)
 
-1. Utility Function Facilitating OpenAI Chat Completion Requests
+### Utility Function Facilitating OpenAI Chat Completion Requests
 ```python
 GPT_MODEL = config["GPT_MODEL"]
 # Chat completion functions
@@ -59,7 +59,7 @@ def chat_completion_request(messages, functions=None, function_call=None, model=
         return e
 ```
 
-2. Define Functions Invoking the Finnhub and ChatOpenAI API
+### Define Functions Invoking the Finnhub and ChatOpenAI API
 In app.py:
 * get_current_stock_price: get current stock price
 * get_company_news: get company-related news
@@ -67,7 +67,7 @@ In app.py:
 * basic_fin: get company basic financials
 * general_faq: general financial Q&A
 
-3. Create function specifications for interacting with APIs
+### Create function specifications for interacting with APIs
 Example (earn_surprises):
 ```python
 {
@@ -91,7 +91,7 @@ Example (earn_surprises):
 ```
 Here, company_name is the only required parameter. Not specifying limit retrieves the full history (up to 4 quarters for free Finnhub subscription).
 
-4. Chat Endpoint Description
+### Chat Endpoint Description
 The /chat endpoint in the Flask application (see app.py) handles POST requests to facilitate interaction with OpenAI's ChatGPT model. It processes user input, generates responses using the ChatGPT model, and intelligently decides which of the 5 functions above to execute based on the model's output. 
 
 ## Web-based chat interface
