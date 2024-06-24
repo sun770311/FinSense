@@ -9,7 +9,6 @@ from langchain_core.messages import HumanMessage
 # Initialize the Finnhub client
 with open('config.json') as config_file:
     config = json.load(config_file)
-
 finnhub_client = finnhub.Client(api_key=config["finnhub_api_key"])
 
 # Function to get current stock price
