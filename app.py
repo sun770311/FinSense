@@ -36,7 +36,13 @@ def chat_completion_request(messages, functions=None, function_call=None, model=
         print(f"Exception: {e}")
         return e
 
-c
+functions_map = {
+    "get_current_stock_price": get_current_stock_price,
+    "get_company_news": get_company_news,
+    "earn_surprises": earn_surprises,
+    "basic_fin": basic_fin,
+    "general_faq": general_faq
+}
 
 functions = [
     {
