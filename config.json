@@ -1,6 +1,6 @@
 {
-    "finnhub_api_key": "******",
-    "openai_api_key": "sk-******",
+    "finnhub_api_key": "*******",
+    "openai_api_key": "sk-*******",
     "GPT_MODEL": "gpt-4-1106-preview",
     "get_current_stock_price": "Stock Price Retriever",
     "get_company_news": "Company News Reporter",
