@@ -172,7 +172,6 @@ def chat():
 
     # Append the assistant's second message
     more_questions_message = "Do you have any more questions I can help with?"
-
     func = config[fn_name] + " speaking:"
 
     return jsonify({
