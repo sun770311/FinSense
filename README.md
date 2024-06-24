@@ -103,7 +103,49 @@ Example (earn_surprises):
 Here, company_name is the only required parameter. Not specifying limit retrieves the full history (up to 4 quarters for free Finnhub subscription).
 
 ### Chat Endpoint Description
-The /chat endpoint in the Flask application (see app.py) handles POST requests to facilitate interaction with OpenAI's ChatGPT model. It processes user input, generates responses using the ChatGPT model, and intelligently decides which of the 5 functions above to execute based on the model's output. 
+The chat endpoint in the Flask application handles POST requests to facilitate interaction with OpenAI's ChatGPT model. It processes user input, generates responses using the ChatGPT model, and intelligently decides which of the 5 functions above to execute based on the model's output. 
+
+Retrieve user input to guide assistant behavior
+```python
+user_input = request.json.get('user_input')
+
+if not user_input:
+    return jsonify({"error": "Invalid input"}), 400
+
+# Initialize messages to guide assistant behavior
+messages = [{"role": "system", "content": 
+                "Don't make assumptions about what values to plug into functions. Ask for clarification if a user request is ambiguous."}]
+messages.append({"role": "user", "content": user_input})
+```
+
+Call ChatGPT completion endpoint with error handling
+```python
+chat_response = chat_completion_request(messages, functions=functions)
+
+if isinstance(chat_response, Exception):
+    return jsonify({"response": "An error occurred while generating the response from ChatGPT."})
+
+try: # parsing ChatGPT response
+    assistant_message = chat_response.json()["choices"][0]["message"]
+except Exception as e:
+    print(f"Error parsing chat response: {e}")
+    return jsonify({"response": "An error occurred while parsing the response from ChatGPT."})
+```
+
+Decide which function to execute based on LLM response
+```python
+fn_name = assistant_message["function_call"]["name"] # extracts name of function based on user input and context
+arguments = assistant_message["function_call"]["arguments"] # extracts function arguments
+function = functions_map.get(fn_name)
+if function:
+    try:
+        result = function(arguments)
+        response_content = result
+    except Exception as e:
+        response_content = "An error occurred while executing the function."
+else:
+    response_content = "Function not found.
+```
 
 ### Running the App
 Navigate to the FinSense directory, then execute from terminal:
