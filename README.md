@@ -1,7 +1,7 @@
 <!-- PROJECT: AUTO-GENERATED DOCS START (do not remove) -->
 
 # FinSense
-A financial analysis and recommendation system leveraging LLMs to answer user input questions with real-time data. 
+A financial analysis and recommendation system leveraging LLMs to answer user queries with real-time data. Intelligently selects which function to execute based on user input.
 
 ## Installation
 Required packages:
