@@ -184,7 +184,9 @@ python app.py
 
 [LangChain](https://js.langchain.com/v0.1/docs/integrations/chat/openai/): LangChain's interface for interacting with OpenAI's API.
 
-[]
+[Alpha Vantage](https://www.alphavantage.co/): Alpha Vantage offers free stock APIs in JSON and CSV formats for realtime and historical stock market data, options, forex, commodity, cryptocurrency, and more.
+
+[Yahoo Finance](https://finance.yahoo.com/): The Yahoo Finance API is a range of libraries/APIs/methods to obtain historical and real time data for a variety of financial markets and products.
 
 
 
