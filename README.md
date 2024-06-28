@@ -27,7 +27,7 @@ pip install -r requirements.txt
 
 3. **Predict Exogenous Values**: Forecast the next 30 days of exogenous variables using linear regression models fitted on historical data.
 
-4. **ARIMA Forecasting**: Forecast stock prices using the SARIMAX model from the pmdarima library. The function automatically determines the best parameters for the model, fits the model with and without exogenous variables, and generates forecasts along with confidence intervals.
+4. **ARIMA Forecasting**: Forecast stock prices using the SARIMAX model from the [pmdarima library](https://alkaline-ml.com/pmdarima/modules/generated/pmdarima.arima.auto_arima.html). The function automatically determines the best parameters for the model, fits the model with and without exogenous variables, and generates forecasts along with confidence intervals.
 
 ```python
 # Settings for exogenous variables
