@@ -157,9 +157,7 @@ python app.py
 ```
 
 ## Web-based chat interface
-![Interface Image](https://github.com/sun770311/FinSense/blob/main/finsense_ui.jpg)
 
-![Popout Image](https://github.com/sun770311/FinSense/blob/main/popout.jpg)
 
 ## Framework and Tools Used
 [Finnhub](https://github.com/Finnhub-Stock-API/finnhub-python): FREE realtime API for stocks, forex and cryptocurrency.
