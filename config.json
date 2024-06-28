@@ -1,7 +1,7 @@
 {
-    "finnhub_api_key": "cpr87s9r01qifjjvlv80cpr87s9r01qifjjvlv8g",
-    "openai_api_key": "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",
-    "alpha_vantage_key": "W3PNGG4HRYXPJA7B",
+    "finnhub_api_key": "******",
+    "openai_api_key": "******",
+    "alpha_vantage_key": "******",
     "GPT_MODEL": "gpt-4-1106-preview",
     "get_current_stock_price": "Stock Price Retriever",
     "get_company_news": "Company News Reporter",
