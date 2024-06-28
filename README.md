@@ -22,7 +22,7 @@ pip install -r requirements.txt
 1. **Download Stock Data**: Fetch daily stock data in CSV format using the Alpha Vantage API. The data is cleaned and prepared by sorting, setting index, and forward-filling missing values.
 
 2. **Load Exogenous Variables**: Fetch S&P 500 Index and IRX (13-week Treasury bill rate) data using Yahoo Finance. 
-* Exogenous variables often result in less optimistic predictions
+* Exogenous variables can result in less optimistic prediction
 * Specifically, the IRX (13-week Treasury bill rate) is considered a risk-free rate and serves as a benchmark for the lowest possible return
 
 3. **Predict Exogenous Values**: Forecast the next 30 days of exogenous variables using linear regression models fitted on historical data.
@@ -206,9 +206,3 @@ python app.py
 [Alpha Vantage](https://www.alphavantage.co/): Alpha Vantage offers free stock APIs in JSON and CSV formats for realtime and historical stock market data, options, forex, commodity, cryptocurrency, and more.
 
 [Yahoo Finance](https://finance.yahoo.com/): The Yahoo Finance API is a range of libraries/APIs/methods to obtain historical and real time data for a variety of financial markets and products.
-
-
-
-
-
-
