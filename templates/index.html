@@ -281,19 +281,19 @@
     <script>
         document.getElementById('chat-form').addEventListener('submit', async function(event) {
             event.preventDefault();
-        
+
             const userInput = document.getElementById('user-input').value;
             const chatBox = document.getElementById('chat-box');
-        
+
             // Append user message to chat box
             const userMessage = document.createElement('p');
             userMessage.className = 'user';
             userMessage.textContent = userInput;
             chatBox.appendChild(userMessage);
-        
+
             // Clear the input field
             document.getElementById('user-input').value = '';
-        
+
             // Send user input to server
             const response = await fetch('/chat', {
                 method: 'POST',
@@ -301,29 +301,45 @@
                 body: JSON.stringify({ user_input: userInput })
             });
             const data = await response.json();
-        
+
             // Append function name message to chat box
             const functionMessage = document.createElement('p');
             functionMessage.className = 'func';
             functionMessage.textContent = data.func;
             chatBox.appendChild(functionMessage);
-        
+
+            // Append explanation message to chat box
+            const explanationMessage = document.createElement('p');
+            explanationMessage.className = 'assistant';
+            explanationMessage.textContent = data.explanation;
+            chatBox.appendChild(explanationMessage);
+
             // Append assistant message to chat box
-            const assistantMessage = document.createElement('p');
-            assistantMessage.className = 'assistant';
-            assistantMessage.textContent = data.response;
-            chatBox.appendChild(assistantMessage);
-        
+            const assistantMessages = data.response.split('\n'); // Split response by newlines
+            assistantMessages.forEach(message => {
+                if (message.trim() !== '') {
+                    const assistantMessage = document.createElement('p');
+                    assistantMessage.className = 'assistant';
+                    assistantMessage.textContent = message.trim();
+                    chatBox.appendChild(assistantMessage);
+                }
+            });
+
             // Scroll chat box to the bottom
             chatBox.scrollTop = chatBox.scrollHeight;
-        
+
             // Append assistant's second message after a 0.5-second delay
             setTimeout(() => {
-                const moreQuestionsMessage = document.createElement('p');
-                moreQuestionsMessage.className = 'assistant';
-                moreQuestionsMessage.textContent = data.more_questions;
-                chatBox.appendChild(moreQuestionsMessage);
-        
+                const moreQuestionsMessages = data.more_questions.split('\n'); // Split more questions by newlines
+                moreQuestionsMessages.forEach(message => {
+                    if (message.trim() !== '') {
+                        const moreQuestionsMessage = document.createElement('p');
+                        moreQuestionsMessage.className = 'assistant';
+                        moreQuestionsMessage.textContent = message.trim();
+                        chatBox.appendChild(moreQuestionsMessage);
+                    }
+                });
+
                 // Scroll chat box to the bottom again
                 chatBox.scrollTop = chatBox.scrollHeight;
             }, 500); // 0.5 second delay
