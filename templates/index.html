@@ -86,6 +86,9 @@
             font-size: 14px;
             color: #d3d3d3; /* Slightly gray-white color for the body text */
         }
+        .task-card.stock-forecast {
+            background: linear-gradient(to bottom right, gray, #50C878); /* Gray to gray-emerald green gradient */
+        }
         .chat-section {
             flex: 1;
             display: flex;
@@ -181,6 +184,9 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             position: relative;
         }
+        .modal-content.stock-forecast {
+            background: linear-gradient(to bottom right, gray, #50C878); /* Gray to gray-emerald green gradient */
+        }
         .close {
             color: #aaa;
             float: right;
@@ -213,15 +219,15 @@
                 <div class="task-cards">
                     <div class="task-card" onclick="openModal('modal1')">
                         <h3>General Financial Q&A</h3>
-                        <p>Provide guidance on personal finance, investing, banking, planning, etc.</p>
+                        <p>Provide guidance on personal finance, investing, banking, planning, news, etc.</p>
                     </div>
                     <div class="task-card" onclick="openModal('modal2')">
-                        <h3>Financial News Retrieval</h3>
-                        <p>Receive news on companies of interest within a specific date range. Source, summary, and URL specified for each entry.</p>
-                    </div>
-                    <div class="task-card" onclick="openModal('modal3')">
-                        <h3>Stock Query</h3>
+                        <h3>Basic Stock Query</h3>
                         <p>Retrieve stock fundamentals, estimates, and price data. (History limited to Finnhub subscription tier)</p>
+                    </div>
+                    <div class="task-card stock-forecast" onclick="openModal('modal3')">
+                        <h3>Stock Forecast</h3>
+                        <p>Forecasts using a SARIMAX model based on stock prices for the past 100 days, S&P 500 Index, and the IRX. Performs stepwise search to determine optimal parameters.</p>
                     </div>
                 </div>
             </div>
@@ -242,38 +248,39 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal('modal1')">&times;</span>
             <h2>General Financial Q&A</h2>
-            <p>In this section, you can ask a variety of questions about personal finance, investing strategies, banking options, financial planning, and more. Our system leverages state-of-the-art language models to provide insightful answers tailored to your needs.</p>
+            <p>In this section, you can ask a variety of questions about personal finance, investing strategies, banking options, financial planning, and company news. Our system leverages state-of-the-art language models to provide insightful answers tailored to your needs.</p>
             <h3>Example Questions:</h3>
             <ul>
                 <li>What is IPO?</li>
                 <li>How can I create a budget to manage my monthly expenses?</li>
                 <li>What steps should I take to plan for retirement?</li>
                 <li>What are the best investment options for someone in their 30s with a moderate risk tolerance?</li>
+                <li>Get me news on Nvidia from May 7 to May 9 2024.</li>
+                <li>Information on Apple in June 2024</li>
             </ul>
         </div>
     </div>
     <div id="modal2" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('modal2')">&times;</span>
-            <h2>Financial News Retrieval</h2>
-            <p>Fetch financial company news in your preferred date range. Our system provides summaries along with direct links to the original articles.</p>
-            <h3>Example Questions:</h3>
-            <ul>
-                <li>Get me news on Nvidia from May 7 to May 9 2024.</li>
-                <li>Information on Apple in June 2024</li>
-            </ul>
-        </div>
-    </div>
-    <div id="modal3" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('modal3')">&times;</span>
-            <h2>Stock Query</h2>
+            <h2>Basic Stock Query</h2>
             <p>Access detailed information on stock performance, including fundamentals, estimates, and price data. Our system provides historical data and real-time updates based on your subscription tier with Finnhub.</p>
             <h3>Example Questions:</h3>
             <ul>
                 <li>Current stock price of 3M</li>
                 <li>All historical earnings surprises of Apple</li>
                 <li>Nike basic financials</li>
+            </ul>
+        </div>
+    </div>
+    <div id="modal3" class="modal">
+        <div class="modal-content stock-forecast">
+            <span class="close" onclick="closeModal('modal3')">&times;</span>
+            <h2>Stock Forecasting</h2>
+            <p>Forecasts using a SARIMAX model based on stock prices for the past 100 days, S&P 500 Index, and the IRX. Performs stepwise search to determine optimal parameters. Takes longer (approx. 2 minutes) to complete run. Server-less running enables plot visualization.</p>
+            <h3>Example Question:</h3>
+            <ul>
+                <li>Forecast the stock price of Palantir</li>
             </ul>
         </div>
     </div>

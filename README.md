@@ -14,6 +14,9 @@ Required packages:
 pip install -r requirements.txt
 ```
 
+## Update (06/28/2024): Stock Forecasting
+
+
 ## Getting Started: Configure API Keys and Model Name
 Modify config.json with your API keys and selected LLM.
 ```json
