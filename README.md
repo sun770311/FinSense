@@ -29,12 +29,12 @@ pip install -r requirements.txt
 
 4. **ARIMA Forecasting**: Forecast stock prices using the SARIMAX model from the pmdarima library. The function automatically determines the best parameters for the model, fits the model with and without exogenous variables, and generates forecasts along with confidence intervals.
 
-(Step 5 is NOT enabled in server run)
-5. **Plot Forecast Results**: Visualize the forecasted stock prices with and without exogenous variables, including confidence intervals, and save the plot as an image.
+5. **Plot Forecast Results**: Visualize the forecasted stock prices with and without exogenous variables, including confidence intervals, and save the plot as an image. (Step 5 is NOT enabled in server run)
 
 6. **LLM Explanation**: Use OpenAI's GPT-4 to generate an explanation of the forecasted stock prices.
 
 7. **Main Forecast Function**
+![Sample Plot](https://github.com/sun770311/FinSense/tree/main)
 
 ## Getting Started: Configure API Keys and Model Name
 Modify config.json with your API keys and selected LLM.
