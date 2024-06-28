@@ -34,7 +34,7 @@ pip install -r requirements.txt
 6. **LLM Explanation**: Use OpenAI's GPT-4 to generate an explanation of the forecasted stock prices.
 
 7. **Main Forecast Function**
-![Sample Plot](https://github.com/sun770311/FinSense/tree/main)
+![Sample Plot](https://github.com/sun770311/FinSense/blob/main/forecast.png)
 
 ## Getting Started: Configure API Keys and Model Name
 Modify config.json with your API keys and selected LLM.
