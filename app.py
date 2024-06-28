@@ -4,6 +4,7 @@ import secrets
 import requests
 from flask import Flask, request, jsonify, render_template
 from func_options import get_current_stock_price, get_company_news, earn_surprises, basic_fin, general_faq
+from forecast import *
 
 # Load configuration from config.json
 with open('config.json') as config_file:
@@ -41,7 +42,8 @@ functions_map = {
     "get_company_news": get_company_news,
     "earn_surprises": earn_surprises,
     "basic_fin": basic_fin,
-    "general_faq": general_faq
+    "general_faq": general_faq,
+    "forecast_stock": forecast_stock
 }
 
 functions = [
@@ -127,6 +129,20 @@ functions = [
             "required": ["query"],
         },
     },
+    {
+        "name": "forecast_stock",
+        "description": "Forecasts the stock price of a given company 1 month into the future.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "company_name": {
+                    "type": "string",
+                    "description": "This is the name of the stock we want to forecast.",
+                }
+            },
+            "required": ["company_name"],
+        },
+    },
 ]
 
 @app.route('/')
@@ -174,8 +190,25 @@ def chat():
     more_questions_message = "Do you have any more questions I can help with?"
     func = config[fn_name] + " speaking:"
 
+    explanation = ""
+    if func == "Stock Forecaster":
+        explanation = """
+                    Forecasting used the SARIMAX model with and without exogenous variables (S&P 500 Index, IRX).\n
+                    Exogenous variables often result in less optimistic predictions because they incorporate broader\n
+                    market conditions and external economic factors. Specifically, the IRX (13-week Treasury bill rate)\n
+                    is considered a risk-free rate and serves as a benchmark for the lowest possible return in the market.\n
+                    When the IRX is included in the model, it accounts for the opportunity cost of investing in risk-free\n
+                    assets versus stocks. Higher IRX values can indicate increased market risk or tightening monetary\n
+                    policy, leading to more conservative (less optimistic) stock price forecasts as investors might prefer\n
+                    safer, lower-return investments.\n\n
+                    When run independently (server-less), forecasting can plot the results with confidence interval
+                    """
+    else:
+        explanation = "It's important to note that the LLM may sometimes provide inaccurate explanations due to its inherent limitations."
+
     return jsonify({
         "func": func,
+        "explanation": explanation,
         "response": response_content,
         "more_questions": more_questions_message
     })
