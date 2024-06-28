@@ -18,8 +18,23 @@ Required packages:
 pip install -r requirements.txt
 ```
 
-## Update (06/28/2024): Stock Forecasting
+## Update (06/28/2024): Stock Forecasting with SARIMAX
+1. **Download Stock Data**: Fetch daily stock data in CSV format using the Alpha Vantage API. The data is cleaned and prepared by sorting, setting index, and forward-filling missing values.
 
+2. **Load Exogenous Variables**: Fetch S&P 500 Index and IRX (13-week Treasury bill rate) data using Yahoo Finance. 
+* Exogenous variables often result in less optimistic predictions
+* Specifically, the IRX (13-week Treasury bill rate) is considered a risk-free rate and serves as a benchmark for the lowest possible return
+
+3. **Predict Exogenous Values**: Forecast the next 30 days of exogenous variables using linear regression models fitted on historical data.
+
+4. **ARIMA Forecasting**: Forecast stock prices using the SARIMAX model from the pmdarima library. The function automatically determines the best parameters for the model, fits the model with and without exogenous variables, and generates forecasts along with confidence intervals.
+
+(Step 5 is NOT enabled in server run)
+5. **Plot Forecast Results**: Visualize the forecasted stock prices with and without exogenous variables, including confidence intervals, and save the plot as an image.
+
+6. **LLM Explanation**: Use OpenAI's GPT-4 to generate an explanation of the forecasted stock prices.
+
+7. **Main Forecast Function**
 
 ## Getting Started: Configure API Keys and Model Name
 Modify config.json with your API keys and selected LLM.
