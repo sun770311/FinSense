@@ -29,6 +29,25 @@ pip install -r requirements.txt
 
 4. **ARIMA Forecasting**: Forecast stock prices using the SARIMAX model from the pmdarima library. The function automatically determines the best parameters for the model, fits the model with and without exogenous variables, and generates forecasts along with confidence intervals.
 
+```python
+# Settings for exogenous variables
+sarimax_kwargs = {
+    'time_varying_regression': True,
+    'enforce_stationarity': True,
+    'enforce_invertibility': True
+}
+# Automatically determine the best SARIMA parameters using pmdarima
+auto_model = pm.auto_arima(stock_data, seasonal=seasonal, m=frequency, 
+                            D=1, stepwise=True, suppress_warnings=True, 
+                            trace=True, **sarimax_kwargs)
+
+model_fit = auto_model.fit(y=stock_data, X=exog_data if exog_data is not None else None)
+    
+forecast, conf_int = model_fit.predict(n_periods=forecast_periods, 
+                                        X=forecasted_exog if forecasted_exog is not None else None, 
+                                        return_conf_int=True)
+```
+
 5. **Plot Forecast Results**: Visualize the forecasted stock prices with and without exogenous variables, including confidence intervals, and save the plot as an image. (Step 5 is NOT enabled in server run)
 
 6. **LLM Explanation**: Use OpenAI's GPT-4 to generate an explanation of the forecasted stock prices.
