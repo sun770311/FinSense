@@ -10,6 +10,10 @@ Required packages:
 * requests==2.31.0
 * langchain-openai==0.1.8
 * langchain-core==0.2.7
+* pmdarima==2.0.4
+* yfinance==0.2.40
+* matplotlib==3.9.0
+* scikit-learn==1.5.0
 ```
 pip install -r requirements.txt
 ```
