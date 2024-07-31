@@ -14,7 +14,7 @@ from func_options import *
 
 """Un-comment to run forecast.py by itself (serverless) to generate plot
     forecast_stock('<company name>')
-    if calling using ticker, replace lines 191-200 with 'company_name = arguments'
+    if calling using ticker, replace lines 221-227 with 'company_name = arguments'
 """
 
 # Load configuration from config.json
